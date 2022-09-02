@@ -7,14 +7,9 @@ public class GameNetworkManager : NetworkManager
     private NetworkWinConditions _winConditions;
     public static new GameNetworkManager singleton { get; private set; }
 
-    private void Awake()
-    {
-        FindLinks();
-    }
     public override void OnClientSceneChanged()
     {
         base.OnClientSceneChanged();
-        FindLinks();
         UpdateLinkPlayers();
     }
 
@@ -34,9 +29,10 @@ public class GameNetworkManager : NetworkManager
         base.OnServerDisconnect(conn);
         UpdateLinkPlayers();
     }
-    //thinks: ReUpdate when some player had disconnect
+    
     private void UpdateLinkPlayers()
     {
+        FindLinks();//fix: Invoke costly operations that can be invoke in only one
         var players = RefindAllPlayers();
         _showScore.SetPlayers(players);
         _winConditions.SetPlayers(players);
