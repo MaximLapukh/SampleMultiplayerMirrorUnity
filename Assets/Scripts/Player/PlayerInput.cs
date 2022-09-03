@@ -14,6 +14,10 @@ public class PlayerInput : MonoBehaviour
     void Update()
     {
         Vector3 moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        Vector3 cameraAngels = Camera.transform.parent.eulerAngles;
+        cameraAngels.x = 0;
+        cameraAngels.z = 0;
+        moveDirection = Quaternion.Euler(cameraAngels) * moveDirection;
         MoveDirection.Invoke(moveDirection);
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
