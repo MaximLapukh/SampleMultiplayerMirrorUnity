@@ -45,12 +45,11 @@ public class PlayerPresent : NetworkBehaviour, IDamagable
             _selfCamera = Instantiate(PlayerCameraPref, transform.position, transform.rotation);
             Camera camera = _selfCamera.GetComponentInChildren<Camera>();
             _selfCamera.GetComponent<CameraMove1>().Player = transform;
-
             PlayerInput playerInput = GetComponent<PlayerInput>();
             playerInput.enabled = true;
             playerInput.Camera = camera;
             playerInput.MoveDirection += NetMoveDirection;
-            playerInput.JumpTo += NetJumpTo;
+            playerInput.JumpToMoveDir += NetJumpTo;
 
         }
         

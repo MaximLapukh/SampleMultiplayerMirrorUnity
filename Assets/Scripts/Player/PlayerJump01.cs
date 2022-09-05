@@ -17,11 +17,11 @@ public class PlayerJump01
         _stateManager = stateManager;
         _timeJump = timeJump;
     }
-    public void Jump(Vector3 pointClick)
+    public void Jump(Vector3 direction)
     {
         if (_stateManager.HaveStateOfType(typeof(JumpState))) return;
 
-        _jump.JumpTo((pointClick - _rigidbody.position).normalized);
+        _jump.JumpTo(direction);
         _jumpState = new JumpState(_timeJump);
             
         _stateManager.AddState(_jumpState);
